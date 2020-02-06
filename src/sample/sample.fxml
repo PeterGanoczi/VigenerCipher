@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <AnchorPane fx:id="pane" prefHeight="322.0" prefWidth="531.0" GridPane.columnIndex="1">
+         <children>
+            <Button fx:id="btnChooseFile" layoutX="66.0" layoutY="57.0" mnemonicParsing="false" onAction="#openFileChooser" prefHeight="26.0" prefWidth="115.0" text="Choose file" />
+            <TextField fx:id="fieldKey" layoutX="286.0" layoutY="57.0" />
+            <Button fx:id="btnDecrypt" layoutX="303.0" layoutY="142.0" mnemonicParsing="false" onAction="#decryptFile" prefHeight="26.0" prefWidth="115.0" text="Decrypt" />
+            <Button fx:id="btnEncrypt" layoutX="66.0" layoutY="142.0" mnemonicParsing="false" onAction="#encryptFile" prefHeight="26.0" prefWidth="115.0" text="Encrypt" />
+            <Label fx:id="lblFilePath" layoutX="66.0" layoutY="91.0" text="Label" />
+            <TextFlow fx:id="txtFileContent" layoutX="27.0" layoutY="178.0" prefHeight="156.0" prefWidth="477.0" />
+         </children></AnchorPane>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>
