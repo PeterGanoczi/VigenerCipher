@@ -21,23 +21,32 @@ public class Controller {
     public TextFlow txtFileContent;
     public Label lblFilePath;
 
+
     public void openFileChooser(){
 
-        JFileChooser fileChooser = new JFileChooser(".");
+        JFileChooser fileChooser = new JFileChooser("C:\\Users\\ledgo\\IdeaProjects\\VigenerCipher\\src\\sample");
         int status = fileChooser.showOpenDialog(null);
 
         if (status == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             System.out.println(selectedFile.getParent());
             System.out.println(selectedFile.getName());
+            lblFilePath.setText(selectedFile.getAbsolutePath());
+
+            ReadFile readed=new ReadFile(selectedFile.getParent(),selectedFile.getName());
+            String message=readed.loadFile(selectedFile.getAbsolutePath());
+            Cipher cipher=new Cipher(fieldKey.getText());
+            cipher.encrypt(message,fieldKey.getText());
+
         } else if (status == JFileChooser.CANCEL_OPTION) {
             System.out.println("canceled");
         }
     }
 
+    public void encryptFile(ActionEvent event) {
+    }
+
     public void decryptFile(ActionEvent event) {
     }
 
-    public void encryptFile(ActionEvent event) {
-    }
 }

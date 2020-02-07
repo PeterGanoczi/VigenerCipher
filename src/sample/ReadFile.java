@@ -5,6 +5,14 @@ import java.util.Scanner;
 
 public class ReadFile {
 
+    private String parentPath;
+    private String path;
+
+    public ReadFile(String parentPath, String path) {
+        this.parentPath = parentPath;
+        this.path = path;
+    }
+
     public String loadFile(String source){
     StringBuilder data=new StringBuilder();
         try{
