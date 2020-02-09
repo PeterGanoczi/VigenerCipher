@@ -35,8 +35,11 @@ public class Controller {
 
             ReadFile readed=new ReadFile(selectedFile.getParent(),selectedFile.getName());
             String message=readed.loadFile(selectedFile.getAbsolutePath());
-            Cipher cipher=new Cipher(fieldKey.getText());
-            cipher.encrypt(message,fieldKey.getText());
+            Cipher cipher=new Cipher();
+            System.out.println("____povodny text____");
+            System.out.println(message);
+            System.out.println("________sifra________");
+            //System.out.println(cipher.encrypt(selectedFile.getAbsolutePath(),"data"));
 
         } else if (status == JFileChooser.CANCEL_OPTION) {
             System.out.println("canceled");
@@ -44,9 +47,14 @@ public class Controller {
     }
 
     public void encryptFile(ActionEvent event) {
+        Cipher cipher=new Cipher();
+
+        cipher.encrypt( fieldKey.getText(), lblFilePath.getText());
     }
 
     public void decryptFile(ActionEvent event) {
+        Cipher cipher=new Cipher();
+        cipher.decrypt(fieldKey.getText(),lblFilePath.getText());
     }
 
 }

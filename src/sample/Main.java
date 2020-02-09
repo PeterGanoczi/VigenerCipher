@@ -18,6 +18,8 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        Cipher cipher=new Cipher();
+        //System.out.println(cipher.encrypt("C:\\Users\\ledgo\\IdeaProjects\\VigenerCipher\\src\\sample\\data.txt","Zebra"));
         launch(args);
     }
 

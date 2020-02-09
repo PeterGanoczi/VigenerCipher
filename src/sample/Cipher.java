@@ -1,38 +1,114 @@
 package sample;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class Cipher {
 
-    private String key;
 
-    public Cipher(String key) {
-        this.key = key;
+
+    public Cipher() {
+
     }
 
-    public String encrypt(String text, String key){
+    public void encrypt(String key, String source){
+        StringBuilder output=new StringBuilder();
+        String keyword=key.toLowerCase();
+        int countKey=0;
 
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(source), StandardCharsets.UTF_8));
+            int c;
 
-        char msg[]=text.toCharArray();
-        int msglen=text.length();
-        int i,j;
+            while ((c = reader.read()) != -1) {
 
-        char keyword[]=new char[msglen];
-        char msgEncrypted[]=new char[msglen];
+                    if ((char) c >= 65 && (char) c <= 90) {
+                        char ch = (char) (c + ((keyword.charAt(countKey)) - 97));
+                        if ((int) ch > 90) {
+                            ch -= 26;
+                        }
+                        output.append(ch);
+                    } else if ((char) c >= 97 && (char) c <= 122) {
+                        char ch = (char) (c + (keyword.charAt(countKey)) - 97);
+                        if ((int) ch > 122) {
+                            ch -= 26;
+                        }
+                        output.append(ch);
+                    } else
+                        output.append((char) c);
 
-        for (i=0, j=0; i<msglen; i++, j++){
-            if (j==key.length()){
-                j=0;
-            } else{
-                keyword[i]=key.charAt(j);
+                    countKey++;
+
+                    if (countKey >= keyword.length()) {
+                        countKey = 0;
+                    }
+                }
+            reader.close();
+
+    } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try{
+            BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ledgo\\IdeaProjects\\VigenerCipher\\src\\sample\\data_encrypted.txt"));
+            writer.write(output.toString());
+            writer.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println(output.toString());
+
+    }
+
+    public void decrypt(String key, String source){
+        StringBuilder output=new StringBuilder();
+        String keyword=key.toLowerCase();
+        int countKey=0;
+
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(source), StandardCharsets.UTF_8));
+            int c;
+
+            while ((c = reader.read()) != -1) {
+
+                if ((char) c >= 65 && (char) c <= 90) {
+                    char ch = (char) (c + ((keyword.charAt(countKey)) - 97));
+                    if ((int) ch < 65) {
+                        ch += 26;
+                    }
+                    output.append(ch);
+                } else if ((char) c >= 97 && (char) c <= 122) {
+                    char ch = (char) (c + (keyword.charAt(countKey)) - 97);
+                    if ((int) ch < 97) {
+                        ch += 26;
+                    }
+                    output.append(ch);
+                } else
+                    output.append((char) c);
+
+                countKey++;
+
+                if (countKey >= keyword.length()) {
+                    countKey = 0;
+                }
             }
-        }
-        for (i=0; i<keyword.length;i++){
-            System.out.println(keyword[i]);
-        }
+            reader.close();
 
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try{
+            BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\ledgo\\IdeaProjects\\VigenerCipher\\src\\sample\\data_decrypted.txt"));
+            writer.write(output.toString());
+            writer.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println(output.toString());
 
-        return null;
     }
-
 }
