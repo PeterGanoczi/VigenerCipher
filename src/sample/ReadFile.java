@@ -13,10 +13,18 @@ public class ReadFile {
         this.path = path;
     }
 
-    public String loadFile(String source){
+    public String getParentPath() {
+        return parentPath;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public String loadFile(String path){
     StringBuilder data=new StringBuilder();
         try{
-            File myFile=new File(source);
+            File myFile=new File(path);
             Scanner myReader=new Scanner(myFile);
             while(myReader.hasNextLine()){
                 data.append("\n").append(myReader.nextLine());

@@ -33,12 +33,12 @@ public class Controller {
             System.out.println(selectedFile.getName());
             lblFilePath.setText(selectedFile.getAbsolutePath());
 
-            ReadFile readed=new ReadFile(selectedFile.getParent(),selectedFile.getName());
+            ReadFile readed=new ReadFile(selectedFile.getParent(),selectedFile.getAbsolutePath());
             String message=readed.loadFile(selectedFile.getAbsolutePath());
-            Cipher cipher=new Cipher();
-            System.out.println("____povodny text____");
+
+            System.out.println("________PLAIN TEXT________");
             System.out.println(message);
-            System.out.println("________sifra________");
+            System.out.println("__________CIPHER__________");
             //System.out.println(cipher.encrypt(selectedFile.getAbsolutePath(),"data"));
 
         } else if (status == JFileChooser.CANCEL_OPTION) {
@@ -48,13 +48,13 @@ public class Controller {
 
     public void encryptFile(ActionEvent event) {
         Cipher cipher=new Cipher();
+        System.out.println(cipher.encrypt(fieldKey.getText(), lblFilePath.getText()));
 
-        cipher.encrypt( fieldKey.getText(), lblFilePath.getText());
     }
 
     public void decryptFile(ActionEvent event) {
         Cipher cipher=new Cipher();
-        cipher.decrypt(fieldKey.getText(),lblFilePath.getText());
+        System.out.println(cipher.decrypt(fieldKey.getText(),lblFilePath.getText()));
     }
 
 }
